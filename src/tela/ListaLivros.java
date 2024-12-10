@@ -170,7 +170,7 @@ public class ListaLivros extends JFrame {
 				exibirMensagemErro("Selecione um Livro");
 				return;
 			}	
-			
+			else {
 			CadastrarLivro cl = new CadastrarLivro();
 
 			EditarLivros = (Livros) listarLivros.getSelectedValue();
@@ -195,7 +195,7 @@ public class ListaLivros extends JFrame {
 			ca.setVisible(true);
 			
 		
-		
+			}
 		}
 
 		protected void ExibirMensagem(String msg) {

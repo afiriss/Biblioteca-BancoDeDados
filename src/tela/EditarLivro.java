@@ -37,8 +37,7 @@ public class EditarLivro extends JFrame {
 		JTextField textFieldTitulo;
 		 JTextField textFieldAutor;
 		 JTextField textFieldGenero;
-		@SuppressWarnings({ "rawtypes", "unused" })
-		private JList listarLivros;
+		private Livros EditarLivros;
 		private JButton btnNewButtonCadastrar;
 		
 		private int id_livro;
@@ -147,17 +146,40 @@ public class EditarLivro extends JFrame {
 		}
 		
 		protected void iniciarEdicaoLivros() throws ClassNotFoundException, SQLException {
-			if (listarLivros.getSelectedIndex() == -1) {
-				exibirMensagemErro("Selecione um Livro");
-				return;
-			}	
-		
-			//Livros EditarLivros = (Livros) listarLivros.getSelectedValue();
-			//textFieldTitulo.setText(EditarLivros.getTitulo());
-			//textFieldAutor.setText(EditarLivros.getAutor());
-			//textFieldGenero.setText(EditarLivros.getGenero());
-					
+			
+			CadastrarLivro cl = new CadastrarLivro();
+//ultimo codigo alterado
+		//	EditarLivros = (Livros) EditarLivro.getSelectedValue();
+			cl.textFieldTitulo.setText(EditarLivros.getTitulo());
+			cl.textFieldAutor.setText(EditarLivros.getAutor());
+			cl.textFieldGenero.setText(EditarLivros.getGenero());
+			this.btnNewButtonCadastrar = new JButton("Editar");
+			btnNewButtonCadastrar.setText("Editar");
+
+
+			EditarLivro ca = null;
+
+			try {
+				ca = new EditarLivro();
+				ca.setLivroatual(EditarLivros);
+			} catch (ClassNotFoundException | SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			ca.setLocationRelativeTo(null);
+			ca.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+			ca.setVisible(true);
+			
+		//	@SuppressWarnings("rawtypes")
+			//JList Livro = null;
+			//editar depois	
+	//		Livros edicao = (Livros) Livro.getSelectedValue();
+		//	textFieldTitulo.setText(edicao.getTitulo());
+			//textFieldAutor.setText(edicao.getAutor());
+			//textFieldGenero.setText(edicao.getGenero());
+			
 			btnNewButtonCadastrar.setText("Finalizar Edição");
+					
 		}
 		
 		protected void ExibirMensagem(String msg) {
@@ -198,26 +220,26 @@ public class EditarLivro extends JFrame {
 			comando.close();
 			conexao.close();
 
-		}
+		}	
 
-		@SuppressWarnings("null")
+	//	@SuppressWarnings("null")
 		protected void Livro() throws ClassNotFoundException, SQLException {
 		    // Verificação dos campos obrigatórios
-		    if (textFieldTitulo.getText().isEmpty()) {
-		        exibirMensagemErro("O título do livro não pode ser vazio.");
-		        return;
-		    }
+		//    if (textFieldTitulo.getText().isEmpty()) {
+		  //      exibirMensagemErro("O título do livro não pode ser vazio.");
+		     //   return;
+		    //}
 
-		    if (textFieldAutor.getText().isEmpty()) {
-		        exibirMensagemErro("O campo 'autor' não pode ser vazio.");
-		        return;
-		    }
+		    //if (textFieldAutor.getText().isEmpty()) {
+		        //exibirMensagemErro("O campo 'autor' não pode ser vazio.");
+		      //  return;
+		    //}
 
-		    if (textFieldGenero.getText().isEmpty()) {
-		        exibirMensagemErro("O gênero do livro não pode ser vazio.");
-		        return;
-		    }
-		 if (btnNewButtonCadastrar.getText().equals("Cadastrar")) {
+		    //if (textFieldGenero.getText().isEmpty()) {
+		      //  exibirMensagemErro("O gênero do livro não pode ser vazio.");
+		        //return;
+		    //}
+		 if (btnNewButtonCadastrar.getText().equals("Finalizar Edição")) {
 
 	        // Cadastro do livro
 	        Connection conexao = BibliotecaVirtual.criarConexao();
