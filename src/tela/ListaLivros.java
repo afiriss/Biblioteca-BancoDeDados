@@ -35,6 +35,7 @@ public class ListaLivros extends JFrame {
 		private JTextField textFieldTitulo;
 		private JTextField textFieldAutor;
 		private JTextField textFieldGenero;
+		@SuppressWarnings("rawtypes")
 		private JList listarLivros;
 		private Livros EditarLivros;
 		private JButton btnNewButtonCadastrar;
@@ -107,6 +108,7 @@ public class ListaLivros extends JFrame {
 
 			JButton btnNewButtonEditar = new JButton("Editar");
 			btnNewButtonEditar.addActionListener(new ActionListener() {
+				
 				public void actionPerformed(ActionEvent e) {
 					try {
 						iniciarEdicaoLivros();
@@ -276,13 +278,13 @@ public class ListaLivros extends JFrame {
 		        comando.setString(3, livro.getGenero());
 		        comando.execute();
 
-		        ExibirMensagem("Livro cadastrado com sucesso!");
+		        ExibirMensagem("Livro atualizado com sucesso!");
 
 		        comando.close();
 		        conexao.close();
 
 
-				JOptionPane.showMessageDialog(null, "O livro foi cadastrado com sucesso", "Info",
+				JOptionPane.showMessageDialog(null, "O livro foi atualizado com sucesso", "Info",
 						JOptionPane.INFORMATION_MESSAGE);
 				
 		    } 

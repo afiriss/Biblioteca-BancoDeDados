@@ -38,7 +38,7 @@ public class EditarLivro extends JFrame {
 		 JTextField textFieldAutor;
 		 JTextField textFieldGenero;
 		private Livros EditarLivros;
-		private JButton btnNewButtonCadastrar;
+		private JButton btnNewButtonEditar;
 		
 		private int id_livro;
 
@@ -120,8 +120,8 @@ public class EditarLivro extends JFrame {
 			lblGenero.setBounds(28, 141, 58, 14);
 			panel.add(lblGenero);
 
-			btnNewButtonCadastrar = new JButton("Finalizar Edição");
-			btnNewButtonCadastrar.addActionListener(new ActionListener() {
+			btnNewButtonEditar = new JButton("Finalizar Edição");
+			btnNewButtonEditar.addActionListener(new ActionListener() {
 				    public void actionPerformed(ActionEvent e) {
 				        try {
 				            iniciarEdicaoLivros(); 
@@ -132,8 +132,8 @@ public class EditarLivro extends JFrame {
 				});
 			
 
-			btnNewButtonCadastrar.setBounds(28, 212, 207, 23);
-			panel.add(btnNewButtonCadastrar);
+			btnNewButtonEditar.setBounds(28, 212, 207, 23);
+			panel.add(btnNewButtonEditar);
 				
 			;
 			
@@ -146,42 +146,81 @@ public class EditarLivro extends JFrame {
 		}
 		
 		protected void iniciarEdicaoLivros() throws ClassNotFoundException, SQLException {
-			
-			CadastrarLivro cl = new CadastrarLivro();
-//ultimo codigo alterado
-		//	EditarLivros = (Livros) EditarLivro.getSelectedValue();
-			cl.textFieldTitulo.setText(EditarLivros.getTitulo());
-			cl.textFieldAutor.setText(EditarLivros.getAutor());
-			cl.textFieldGenero.setText(EditarLivros.getGenero());
-			this.btnNewButtonCadastrar = new JButton("Editar");
-			btnNewButtonCadastrar.setText("Editar");
+		    // Verificação dos campos obrigatórios
+		    if (textFieldTitulo.getText().isEmpty()) {
+		        exibirMensagemErro("O título do livro não pode ser vazio.");
+		        return;
+		    }
 
+		    if (textFieldAutor.getText().isEmpty()) {
+		        exibirMensagemErro("O campo 'autor' não pode ser vazio.");
+		        return;
+		    }
 
-			EditarLivro ca = null;
+		    if (textFieldGenero.getText().isEmpty()) {
+		        exibirMensagemErro("O gênero do livro não pode ser vazio.");
+		        return;
+		    }
+		 if (btnNewButtonEditar.getText().equals("Finalizar Edição")) {
 
-			try {
-				ca = new EditarLivro();
-				ca.setLivroatual(EditarLivros);
-			} catch (ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			ca.setLocationRelativeTo(null);
-			ca.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-			ca.setVisible(true);
-			
-		//	@SuppressWarnings("rawtypes")
-			//JList Livro = null;
-			//editar depois	
-	//		Livros edicao = (Livros) Livro.getSelectedValue();
-		//	textFieldTitulo.setText(edicao.getTitulo());
-			//textFieldAutor.setText(edicao.getAutor());
-			//textFieldGenero.setText(edicao.getGenero());
-			
-			btnNewButtonCadastrar.setText("Finalizar Edição");
-					
-		}
-		
+	        // Cadastro do livro
+	        Connection conexao = BibliotecaVirtual.criarConexao();
+	        String sql = "UPDATE Cadastrolivros SET titulo=?, autor=?, genero=? WHERE id_livro=?";
+
+	        Livros livro = new Livros();
+	        livro.setTitulo(textFieldTitulo.getText());
+	        livro.setAutor(textFieldAutor.getText());
+	        livro.setGenero(textFieldGenero.getText());
+
+	        PreparedStatement comando = conexao.prepareStatement(sql);
+	        comando.setString(1, livro.getTitulo());
+	        comando.setString(2, livro.getAutor());
+	        comando.setString(3, livro.getGenero());
+	        comando.setInt(4, livro.getId_livro());
+	        comando.execute();
+
+	        ExibirMensagem("Livro cadastrado com sucesso!");
+
+	        comando.close();
+	        conexao.close();
+
+	    }  //else if (btnNewButtonCadastrar.getText().equals("Editar")) {
+
+		//	Connection conexao = BibliotecaVirtual.criarConexao();
+
+	     //   Livros EditarLivros = null;
+			//EditarLivros.setTitulo(textFieldTitulo.getText());
+	        //EditarLivros.setAutor(textFieldAutor.getText());
+	       /* EditarLivros.setGenero(textFieldGenero.getText());
+
+			String sql = "UPDATE Cadastrolivros SET titulo=?, autor=?, genero=? WHERE id_livro=?";
+
+	        
+	        PreparedStatement comando = conexao.prepareStatement(sql);
+	        comando.setString(1, EditarLivros.getTitulo());
+	        comando.setString(2, EditarLivros.getAutor());
+	        comando.setString(3, EditarLivros.getGenero());
+	        comando.setInt(4, EditarLivros.getId_livro());
+	        comando.executeUpdate();
+
+	        ExibirMensagem("Dados do livro atualizados com sucesso!");
+
+	        comando.close();
+	        conexao.close();*/
+
+	        // Resetando a edição
+	        EditarLivros = null;
+	    
+
+	    // Atualiza a lista de livros
+	    atualizarListagemLivros();
+
+	    // Limpa os campos de texto após a operação
+	    textFieldTitulo.setText("");
+	    textFieldAutor.setText("");
+	    textFieldGenero.setText("");
+	}
+
 		protected void ExibirMensagem(String msg) {
 			JOptionPane.showMessageDialog(null, msg, "Info", JOptionPane.INFORMATION_MESSAGE);
 
@@ -239,7 +278,7 @@ public class EditarLivro extends JFrame {
 		      //  exibirMensagemErro("O gênero do livro não pode ser vazio.");
 		        //return;
 		    //}
-		 if (btnNewButtonCadastrar.getText().equals("Finalizar Edição")) {
+		 if (btnNewButtonEditar.getText().equals("Finalizar Edição")) {
 
 	        // Cadastro do livro
 	        Connection conexao = BibliotecaVirtual.criarConexao();
@@ -261,7 +300,7 @@ public class EditarLivro extends JFrame {
 	        comando.close();
 	        conexao.close();
 
-	    }  else if (btnNewButtonCadastrar.getText().equals("Finalizar Edição")) {
+	    }  else if (btnNewButtonEditar.getText().equals("Finalizar Edição")) {
 
 			Connection conexao = BibliotecaVirtual.criarConexao();
 
