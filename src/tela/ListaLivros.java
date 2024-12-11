@@ -13,6 +13,7 @@ import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
@@ -24,6 +25,9 @@ import javax.swing.border.TitledBorder;
 
 import banco.BibliotecaVirtual;
 import dominio.Livros;
+import javax.swing.JLabel;
+import javax.swing.ImageIcon;
+import javax.swing.border.EtchedBorder;
 
 public class ListaLivros extends JFrame {
 
@@ -64,7 +68,7 @@ public class ListaLivros extends JFrame {
 		 */
 		@SuppressWarnings({ "rawtypes" })
 		public ListaLivros() throws ClassNotFoundException, SQLException {
-			setTitle("Cadastro de Livros");
+			setTitle("Lista de livros disponíveis na sua Biblioteca Virtual");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			setBounds(100, 100, 596, 383);
 			contentPane = new JPanel();
@@ -75,11 +79,12 @@ public class ListaLivros extends JFrame {
 			contentPane.setLayout(null);
 
 			JPanel panel_1 = new JPanel();
-			panel_1.setBorder(
-					new TitledBorder(null, "Livros disponíveis para consulta:", TitledBorder.LEADING, TitledBorder.TOP, null, null));
+			panel_1.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Livros dispon\u00EDveis para consulta:", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(0, 0, 0)));
 			panel_1.setBounds(0, 0, 580, 344);
 			contentPane.add(panel_1);
 			panel_1.setLayout(null);
+
+
 
 			JScrollPane scrollPane = new JScrollPane();
 			scrollPane.setBounds(42, 31, 502, 226);
@@ -112,7 +117,6 @@ public class ListaLivros extends JFrame {
 				public void actionPerformed(ActionEvent e) {
 					try {
 						iniciarEdicaoLivros();
-						
 					} catch (ClassNotFoundException | SQLException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -173,30 +177,27 @@ public class ListaLivros extends JFrame {
 				return;
 			}	
 			else {
-			CadastrarLivro cl = new CadastrarLivro();
+				CadastrarLivro cl = new CadastrarLivro();
+	
+				EditarLivros = (Livros) listarLivros.getSelectedValue();
+				cl.textFieldTitulo.setText(EditarLivros.getTitulo());
+				cl.textFieldAutor.setText(EditarLivros.getAutor());
+				cl.textFieldGenero.setText(EditarLivros.getGenero());
+				this.btnNewButtonCadastrar = new JButton("Editar");
+				btnNewButtonCadastrar.setText("Editar");
 
-			EditarLivros = (Livros) listarLivros.getSelectedValue();
-			cl.textFieldTitulo.setText(EditarLivros.getTitulo());
-			cl.textFieldAutor.setText(EditarLivros.getAutor());
-			cl.textFieldGenero.setText(EditarLivros.getGenero());
-			this.btnNewButtonCadastrar = new JButton("Editar");
-			btnNewButtonCadastrar.setText("Editar");
-
-
-			EditarLivro ca = null;
-
-			try {
-				ca = new EditarLivro();
-				ca.setLivroatual(EditarLivros);
-			} catch (ClassNotFoundException | SQLException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			ca.setLocationRelativeTo(null);
-			ca.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-			ca.setVisible(true);
-			
-		
+				EditarLivro ca = null;
+				try {
+					ca = new EditarLivro();
+					ca.setLivroatual(EditarLivros);
+					ca.setLocationRelativeTo(null);
+					ca.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+					ca.setVisible(true);
+				} catch (Exception e1) {
+					e1.printStackTrace();
+				}
+				
+				atualizarListagemLivros();
 			}
 		}
 

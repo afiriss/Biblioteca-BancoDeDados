@@ -131,7 +131,7 @@ public class CadastrarLivro extends JFrame {
 			;
 			
 			JLabel lblNewLabel = new JLabel("");
-			lblNewLabel.setIcon(new ImageIcon(CadastrarLivro.class.getResource("/img/Studioghibli1.jpg")));
+			lblNewLabel.setIcon(new ImageIcon(CadastrarLivro.class.getResource("/img/IMG_5363.jpeg")));
 			lblNewLabel.setBounds(0, 0, 596, 338);
 			contentPane.add(lblNewLabel);
 

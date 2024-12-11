@@ -111,7 +111,7 @@ public class Principal extends JFrame {
 		panel.add(btnNewButton_2);
 		
 		JLabel lblNewLabelImagem = new JLabel("");
-		lblNewLabelImagem.setIcon(new ImageIcon(Principal.class.getResource("/img/Studioghibli1.jpg")));
+		lblNewLabelImagem.setIcon(new ImageIcon(Principal.class.getResource("/img/IMG_5362.jpeg")));
 		lblNewLabelImagem.setBounds(0, 0, 577, 347);
 		panel.add(lblNewLabelImagem);
 		
