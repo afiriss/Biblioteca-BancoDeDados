@@ -138,7 +138,7 @@ public class EditarLivro extends JFrame {
 			;
 			
 			JLabel lblNewLabel = new JLabel("");
-			lblNewLabel.setIcon(new ImageIcon(CadastrarLivro.class.getResource("/img/Studioghibli1.jpg")));
+			lblNewLabel.setIcon(new ImageIcon(EditarLivro.class.getResource("/img/IMG_5362.jpeg")));
 			lblNewLabel.setBounds(0, 0, 319, 338);
 			contentPane.add(lblNewLabel);
 
