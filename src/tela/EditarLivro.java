@@ -171,6 +171,7 @@ public class EditarLivro extends JFrame {
 	        livro.setTitulo(textFieldTitulo.getText());
 	        livro.setAutor(textFieldAutor.getText());
 	        livro.setGenero(textFieldGenero.getText());
+	        livro.setId_livro(this.id_livro);
 
 	        PreparedStatement comando = conexao.prepareStatement(sql);
 	        comando.setString(1, livro.getTitulo());
@@ -179,7 +180,7 @@ public class EditarLivro extends JFrame {
 	        comando.setInt(4, livro.getId_livro());
 	        comando.execute();
 
-	        ExibirMensagem("Livro cadastrado com sucesso!");
+	        ExibirMensagem("Livro editado com sucesso!");
 
 	        comando.close();
 	        conexao.close();
