@@ -184,15 +184,15 @@ public class ListaLivros extends JFrame {
 				cl.textFieldAutor.setText(EditarLivros.getAutor());
 				cl.textFieldGenero.setText(EditarLivros.getGenero());
 				this.btnNewButtonCadastrar = new JButton("Editar");
-				btnNewButtonCadastrar.setText("Editar");
+				btnNewButtonCadastrar.setText("Editar");				
 
-				EditarLivro ca = null;
+				DialogEditarLivro del = null;
 				try {
-					ca = new EditarLivro();
-					ca.setLivroatual(EditarLivros);
-					ca.setLocationRelativeTo(null);
-					ca.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-					ca.setVisible(true);
+					del = new DialogEditarLivro();
+					del.setLivroatual(EditarLivros);
+					del.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+					del.setModal(true);
+					del.setVisible(true);
 				} catch (Exception e1) {
 					e1.printStackTrace();
 				}
