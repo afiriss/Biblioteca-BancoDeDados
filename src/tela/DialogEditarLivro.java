@@ -56,7 +56,7 @@ public class DialogEditarLivro extends JDialog {
 		JPanel panel = new JPanel();
 		panel.setLayout(null);
 		panel.setOpaque(false);
-		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Editar livro", TitledBorder.LEFT, TitledBorder.TOP, null, new Color(255, 255, 255)));
+		panel.setBorder(new TitledBorder(new EtchedBorder(EtchedBorder.LOWERED, new Color(255, 255, 255), new Color(160, 160, 160)), "Editar livro", TitledBorder.CENTER, TitledBorder.TOP, null, new Color(255, 255, 255)));
 		panel.setBounds(10, 11, 284, 316);
 		getContentPane().add(panel);
 		

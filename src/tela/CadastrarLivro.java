@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -20,25 +21,20 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import banco.BibliotecaVirtual;
 import dominio.Livros;
-import javax.swing.ImageIcon;
-import javax.swing.border.EtchedBorder;
-import javax.swing.JScrollPane;
 
 public class CadastrarLivro extends JFrame {
 
-		/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 		private JPanel contentPane;
 		JTextField textFieldTitulo;
 		 JTextField textFieldAutor;
 		 JTextField textFieldGenero;
-		@SuppressWarnings({ "rawtypes", "unused" })
+		@SuppressWarnings({ "rawtypes" })
 		private JList listarLivros;
 		private JButton btnNewButtonCadastrar;
 
@@ -131,7 +127,7 @@ public class CadastrarLivro extends JFrame {
 			;
 			
 			JLabel lblNewLabel = new JLabel("");
-			lblNewLabel.setIcon(new ImageIcon(CadastrarLivro.class.getResource("/img/IMG_5363.jpeg")));
+			lblNewLabel.setIcon(new ImageIcon(CadastrarLivro.class.getResource("/img/IMG_5361.jpeg")));
 			lblNewLabel.setBounds(0, 0, 596, 338);
 			contentPane.add(lblNewLabel);
 
