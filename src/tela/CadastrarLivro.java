@@ -191,7 +191,6 @@ public class CadastrarLivro extends JFrame {
 
 		}
 
-		@SuppressWarnings("null")
 		protected void cadastrarLivro() throws ClassNotFoundException, SQLException {
 		    // Verificação dos campos obrigatórios
 		    if (textFieldTitulo.getText().isEmpty()) {
@@ -230,32 +229,6 @@ public class CadastrarLivro extends JFrame {
 	        comando.close();
 	        conexao.close();
 
-	    }  else if (btnNewButtonCadastrar.getText().equals("Editar")) {
-
-			Connection conexao = BibliotecaVirtual.criarConexao();
-
-	        Livros EditarLivros = null;
-			EditarLivros.setTitulo(textFieldTitulo.getText());
-	        EditarLivros.setAutor(textFieldAutor.getText());
-	        EditarLivros.setGenero(textFieldGenero.getText());
-
-			String sql = "UPDATE Cadastrolivros SET titulo=?, autor=?, genero=? WHERE id_livro=?";
-
-	        
-	        PreparedStatement comando = conexao.prepareStatement(sql);
-	        comando.setString(1, EditarLivros.getTitulo());
-	        comando.setString(2, EditarLivros.getAutor());
-	        comando.setString(3, EditarLivros.getGenero());
-	        comando.setInt(4, EditarLivros.getId_livro());
-	        comando.executeUpdate();
-
-	        ExibirMensagem("Dados do livro atualizados com sucesso!");
-
-	        comando.close();
-	        conexao.close();
-
-	        // Resetando a edição
-	        EditarLivros = null;
 	    }
 
 	    // Atualiza a lista de livros

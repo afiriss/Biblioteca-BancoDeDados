@@ -13,20 +13,16 @@ import java.util.List;
 
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
 
 import banco.BibliotecaVirtual;
 import dominio.Livros;
-import javax.swing.JLabel;
-import javax.swing.ImageIcon;
 import javax.swing.border.EtchedBorder;
 
 public class ListaLivros extends JFrame {
@@ -36,9 +32,6 @@ public class ListaLivros extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 		private JPanel contentPane;
-		private JTextField textFieldTitulo;
-		private JTextField textFieldAutor;
-		private JTextField textFieldGenero;
 		@SuppressWarnings("rawtypes")
 		private JList listarLivros;
 		private Livros EditarLivros;
@@ -66,7 +59,7 @@ public class ListaLivros extends JFrame {
 		 * @throws SQLException
 		 * @throws ClassNotFoundException
 		 */
-		@SuppressWarnings({ "rawtypes" })
+		@SuppressWarnings("rawtypes")
 		public ListaLivros() throws ClassNotFoundException, SQLException {
 			setTitle("Lista de livros disponíveis na sua Biblioteca Virtual");
 			setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -118,7 +111,6 @@ public class ListaLivros extends JFrame {
 					try {
 						iniciarEdicaoLivros();
 					} catch (ClassNotFoundException | SQLException e1) {
-						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}
 				}
@@ -243,89 +235,6 @@ public class ListaLivros extends JFrame {
 			conexao.close();
 
 		}
-
-		protected void EditarLivro() throws ClassNotFoundException, SQLException {
-		    // Verificação dos campos obrigatórios
-		    if (textFieldTitulo.getText().isEmpty()) {
-		        exibirMensagemErro("O título do livro não pode ser vazio.");
-		        return;
-		    }
-
-		    if (textFieldAutor.getText().isEmpty()) {
-		        exibirMensagemErro("O campo 'autor' não pode ser vazio.");
-		        return;
-		    }
-
-		    if (textFieldGenero.getText().isEmpty()) {
-		        exibirMensagemErro("O gênero do livro não pode ser vazio.");
-		        return;
-		    }
-
-		    
-		    if (btnNewButtonCadastrar.getText().equals("Finalizar Edição")) {
-
-		        // Cadastro do livro
-		        Connection conexao = BibliotecaVirtual.criarConexao();
-		        String sql = "INSERT INTO CadastroLivros (titulo, autor, genero) VALUES (?,?,?)";
-
-		        Livros livro = new Livros();
-		        livro.setTitulo(textFieldTitulo.getText());
-		        livro.setAutor(textFieldAutor.getText());
-		        livro.setGenero(textFieldGenero.getText());
-
-		        PreparedStatement comando = conexao.prepareStatement(sql);
-		        comando.setString(1, livro.getTitulo());
-		        comando.setString(2, livro.getAutor());
-		        comando.setString(3, livro.getGenero());
-		        comando.execute();
-
-		        ExibirMensagem("Livro atualizado com sucesso!");
-
-		        comando.close();
-		        conexao.close();
-
-
-				JOptionPane.showMessageDialog(null, "O livro foi atualizado com sucesso", "Info",
-						JOptionPane.INFORMATION_MESSAGE);
-				
-		    } 
-		    
-		    if (btnNewButtonCadastrar.getText().equals("Finalizar Edição")) {
-
-				Connection conexao = BibliotecaVirtual.criarConexao();
-
-		        EditarLivros.setTitulo(textFieldTitulo.getText());
-		        EditarLivros.setAutor(textFieldAutor.getText());
-		        EditarLivros.setGenero(textFieldGenero.getText());
-
-				String sql = "UPDATE Cadastrolivros SET titulo=?, autor=?, genero=? WHERE id_livro=?";
-
-		        
-		        PreparedStatement comando = conexao.prepareStatement(sql);
-		        comando.setString(1, EditarLivros.getTitulo());
-		        comando.setString(2, EditarLivros.getAutor());
-		        comando.setString(3, EditarLivros.getGenero());
-		        comando.setInt(4, EditarLivros.getId_livro());
-		        comando.executeUpdate();
-
-		        ExibirMensagem("Dados do livro atualizados com sucesso!");
-
-		        comando.close();
-		        conexao.close();
-
-		        // Resetando a edição
-		        EditarLivros = null;
-		    }
-
-		    // Atualiza a lista de livros
-		    atualizarListagemLivros();
-
-		    // Limpa os campos de texto após a operação
-		    textFieldTitulo.setText("");
-		    textFieldAutor.setText("");
-		    textFieldGenero.setText("");
-		}
-
 
 		private void exibirMensagemErro(String msg) {
 			JOptionPane.showMessageDialog(null, msg, "ERRO", JOptionPane.ERROR_MESSAGE);
